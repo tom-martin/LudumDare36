@@ -66,7 +66,7 @@ function initGame() {
     container.appendChild(renderer.domElement);
     container.appendChild( stats.domElement );
 
-    var light = new THREE.AmbientLight( 0x404040 ); // soft white light
+    var light = new THREE.AmbientLight( 0xffffff );
     scene.add( light );
 
     input = new Input();
@@ -80,12 +80,15 @@ function initGame() {
 
     createPlayer(scene, playerSystem, threeJsSystem);
     createRoller(scene, true, 2, 2, playerSystem, threeJsSystem);
-    createRoller(scene, false, 4, -3, playerSystem, threeJsSystem);
+    createRoller(scene, false, 3, -1, playerSystem, threeJsSystem);
 
     createRoller(scene, true, 3, 4, playerSystem, threeJsSystem);
-    createRoller(scene, false, 4, -1, playerSystem, threeJsSystem);
+    createRoller(scene, false, 5, -1, playerSystem, threeJsSystem);
 
-    createBlock(scene, 0, -1, playerSystem, threeJsSystem);
+    createBlock(scene, 0, -5, playerSystem, threeJsSystem);
+
+    createRoller(scene, true, 0, -6, playerSystem, threeJsSystem);
+    createRoller(scene, true, 0, -4, playerSystem, threeJsSystem);
 }
 
 function render(t) {
@@ -94,7 +97,7 @@ function render(t) {
     lastFrameTime = t;
     requestAnimationFrame(render);
 
-    playerSystem.update(tick);
+    playerSystem.update(t, tick);
     threeJsSystem.update(tick);
 
     renderer.render(scene, threeCamera);

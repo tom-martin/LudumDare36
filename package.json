@@ -1,0 +1,11 @@
+{
+  "name": "pack",
+  "description": "pack",
+  "author": "me",
+  "dependencies": {
+    "promise": "~6.1.0",
+    "node-getopt": "~0.2.3",
+    "gm": "~1.17.0",
+    "lwip": "0.0.6"
+  }
+}

@@ -3,6 +3,10 @@ function ThreeJsComponent() {
     this.positionOffset = new THREE.Vector3();
 }
 
+function SpriteComponent() {
+    this.sprite = null;
+}
+
 function PositionComponent() {
     this.position = new THREE.Vector3();
     this.rotation = new THREE.Euler( 0, 0, 0, 'XYZ' );
@@ -17,6 +21,9 @@ function CollisionComponent() {
     this.halfHeight = 1;
     this.canMoveVertically = true;
     this.canMoveHorizontally = true;
+    this.isBlock = false;
+    this.isRoller = false;
+    this.isUnderBlock = false;
 }
 
 function CameraComponent() {

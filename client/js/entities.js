@@ -12,13 +12,17 @@ rockTexture.repeat.set( 3, 1 );
 
 var createPlayer = function(scene, playerSystem, threeJsSystem) {
 	var entity = {};
-	var geom = new THREE.PlaneGeometry( 1, 2);
-	var mat = new THREE.MeshBasicMaterial({color: 0xFF0000});
+
+	var sprite = new Sprite(1, 2, scene, Textures.playerSheet, "playerSouth", 1, null);
+
 	entity.threeJsComponent = new ThreeJsComponent();
-	entity.threeJsComponent.mesh = new THREE.Mesh( geom, mat );
+	entity.threeJsComponent.mesh = sprite.mesh;
 	entity.threeJsComponent.positionOffset.y += 0.5;
 	threeJsSystem.entities.push(entity);
 	entity.positionComponent = new PositionComponent();
+
+	entity.spriteComponent = new SpriteComponent();
+	entity.spriteComponent.sprite = sprite;
 
 	scene.add(entity.threeJsComponent.mesh);
 
@@ -37,7 +41,7 @@ var createBlock = function(scene, x, y, playerSystem, threeJsSystem) {
 	entity.collisionComponent = new CollisionComponent();
 	entity.collisionComponent.halfWidth = 1.5;
 	entity.collisionComponent.halfHeight = 1.5;
-	entity.collisionComponent.canMoveHorizontally = true;
+	entity.collisionComponent.isBlock = true;
 	
 	var mat = new THREE.MeshBasicMaterial({color: 0x404040});
 	entity.threeJsComponent = new ThreeJsComponent();
@@ -45,9 +49,10 @@ var createBlock = function(scene, x, y, playerSystem, threeJsSystem) {
 	threeJsSystem.entities.push(entity);
 	entity.positionComponent = new PositionComponent();
 
-	entity.positionComponent.position.set(x, y, -0.001);
+	entity.positionComponent.position.set(x, y, -0.00001);
 
 	playerSystem.playerCollisionEntities.push(entity);
+	playerSystem.blockEntity = entity;
 
 	scene.add(entity.threeJsComponent.mesh);
 
@@ -69,6 +74,8 @@ var createRoller = function(scene, horizontal, x, y, playerSystem, threeJsSystem
 		entity.collisionComponent.halfHeight = 2;
 		entity.collisionComponent.canMoveVertically = false;
 	}
+	entity.collisionComponent.isRoller = true;
+
 	var mat = new THREE.MeshBasicMaterial({color: 0xFFaa00});
 	entity.threeJsComponent = new ThreeJsComponent();
 	entity.threeJsComponent.mesh = new THREE.Mesh( geom, mat );

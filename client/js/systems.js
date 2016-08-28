@@ -18,9 +18,88 @@ function ThreeJsSystem() {
 function PlayerSystem(input) {
     var self = this;
     self.player = null;
+    self.blockEntity = null;
+    self.block = null;
     var playerSpeed = 5;
 
     self.playerCollisionEntities = [];
+
+    var tryAndMoveBlock = function(rockEntity, requiredMove) {
+        var canMoveVertically = false;
+        var canMoveHorizontally = false;
+        var totalCount = 0;
+        var currentPosition = rockEntity.positionComponent.position;
+
+        var moveColComp = rockEntity.collisionComponent;
+
+        for(var i in self.playerCollisionEntities) {
+            var otherEntity = self.playerCollisionEntities[i];
+            var colComp = otherEntity.collisionComponent;
+            if(colComp.isRoller) {
+                var pos = otherEntity.positionComponent.position;
+                
+                if(!(currentPosition.x + moveColComp.halfWidth <= pos.x-colComp.halfWidth ||
+                     currentPosition.x - moveColComp.halfWidth >= pos.x+colComp.halfWidth ||
+                     currentPosition.y + moveColComp.halfHeight <= pos.y-colComp.halfHeight ||
+                     currentPosition.y - moveColComp.halfHeight >= pos.y+colComp.halfHeight
+                    )) {
+                    if(colComp.canMoveVertically) {
+                        canMoveVertically = true;
+                        totalCount ++;
+                    }
+                    if(colComp.canMoveHorizontally) {
+                        canMoveHorizontally = true;
+                        totalCount ++;
+                    }
+                }
+                if(totalCount >= 2 && colComp.canMoveHorizontally && colComp.canMoveVertically) {
+                    break;
+                }
+            }
+        }
+
+        if(totalCount >= 2) {
+            if(!canMoveHorizontally) {
+                requiredMove.x = 0;
+            }
+
+            if(!canMoveVertically) {
+                requiredMove.y = 0;
+            }
+        } else {
+            requiredMove.set(0, 0, 0);
+        }
+
+        if(requiredMove.lengthSq() > 0) {
+            var halfMove = new THREE.Vector3();
+            halfMove.copy(requiredMove);
+            halfMove.divideScalar(2);
+            for(var i in self.playerCollisionEntities) {
+                var otherEntity = self.playerCollisionEntities[i];
+                var colComp = otherEntity.collisionComponent;
+                if(colComp.isRoller) {
+                    var pos = otherEntity.positionComponent.position;
+                    
+                    if(doEntitiesCollide(currentPosition, moveColComp, pos, colComp)) {
+                        tryAndMove(otherEntity, halfMove);   
+                    }
+                }
+            }
+        }
+
+        currentPosition.add(requiredMove);
+
+        return requiredMove;
+    }
+
+    var doEntitiesCollide = function(posA, colA, posB, colB) {
+
+        return !( posA.x + colA.halfWidth <= posB.x-colB.halfWidth ||
+                  posA.x - colA.halfWidth >= posB.x+colB.halfWidth ||
+                  posA.y + colA.halfHeight <= posB.y-colB.halfHeight ||
+                  posA.y - colA.halfHeight >= posB.y+colB.halfHeight
+                )
+    }
 
     var tryAndMove = function(moveEntity, requiredMove) {
         var nextPosition = new THREE.Vector3();
@@ -39,15 +118,13 @@ function PlayerSystem(input) {
 
         for(var i in self.playerCollisionEntities) {
             var otherEntity = self.playerCollisionEntities[i];
+            var colComp = otherEntity.collisionComponent;
 
             if(otherEntity != moveEntity) {
+                if(moveEntity == self.player && colComp.isUnderBlock) continue;
+
                 var pos = otherEntity.positionComponent.position;
-                var colComp = otherEntity.collisionComponent;
-                if(!(nextPosition.x + moveColComp.halfWidth <= pos.x-colComp.halfWidth ||
-                     nextPosition.x - moveColComp.halfWidth >= pos.x+colComp.halfWidth ||
-                     nextPosition.y + moveColComp.halfHeight <= pos.y-colComp.halfHeight ||
-                     nextPosition.y - moveColComp.halfHeight >= pos.y+colComp.halfHeight
-                    )) {
+                if(doEntitiesCollide(nextPosition, moveColComp, pos, colComp)) {
                     var moveTheOtherGuy = new THREE.Vector3();
                     if(nextMove.x > 0) {
                         moveTheOtherGuy.x = (nextPosition.x+moveColComp.halfWidth) - (pos.x-colComp.halfWidth);
@@ -59,7 +136,16 @@ function PlayerSystem(input) {
                         moveTheOtherGuy.y = -((pos.y+colComp.halfHeight)-(nextPosition.y-moveColComp.halfHeight));
                     }
                     nextMove.sub(moveTheOtherGuy);
-                    var actualMove = tryAndMove(otherEntity, moveTheOtherGuy);
+                    var actualMove = null;
+                    if(colComp.isBlock) {
+                        if(!moveColComp.isRoller) {
+                            actualMove = tryAndMoveBlock(otherEntity, moveTheOtherGuy);
+                        } else {
+                            actualMove = moveTheOtherGuy;
+                        }
+                    } else {
+                        actualMove = tryAndMove(otherEntity, moveTheOtherGuy);
+                    }
                     nextMove.add(actualMove);
 
                     nextPosition.copy(moveEntity.positionComponent.position);
@@ -72,19 +158,49 @@ function PlayerSystem(input) {
         return nextMove;
     }
 
-    this.update = function(tick) {
-        var moveEntity = this.player;
+    var updateIsUnderBlockStatus = function() {
+        var blockPosition = self.blockEntity.positionComponent.position;
+        var blockColComp = self.blockEntity.collisionComponent;
+
+        var playerPosition = self.player.positionComponent.position;
+        var playerColComp = self.player.collisionComponent;
+
+        for(var i in self.playerCollisionEntities) {
+            var otherEntity = self.playerCollisionEntities[i];
+            var colComp = otherEntity.collisionComponent;
+            if(colComp.isRoller) {
+                var pos = otherEntity.positionComponent.position;
+                
+                if(doEntitiesCollide(blockPosition, blockColComp, pos, colComp)) {
+                    colComp.isUnderBlock = true;
+                } else if(!doEntitiesCollide(playerPosition, playerColComp, pos, colComp)) {
+                    colComp.isUnderBlock = false;
+                }
+            }
+        }
+    }
+
+    this.update = function(now, tick) {
         var nextMove = new THREE.Vector3(0, 0, 0);
+
+        updateIsUnderBlockStatus();
+        var sprite = this.player.spriteComponent.sprite;
 
         if(input.north.down) {
             nextMove.y += tick*playerSpeed;
+            sprite.setAnim("playerNorth");
         } else if(input.east.down) {
             nextMove.x += tick*playerSpeed;
+            sprite.setAnim("playerEast");
         } else if(input.south.down) {
             nextMove.y -= tick*playerSpeed;
+            sprite.setAnim("playerSouth");
         } else if(input.west.down) {
             nextMove.x -= tick*playerSpeed;
+            sprite.setAnim("playerWest");
         }
+
+        sprite.update(now);
 
         tryAndMove(this.player, nextMove)
     }
