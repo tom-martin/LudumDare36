@@ -6,14 +6,40 @@
             margin: 0px;
             overflow: hidden;
         }
+
+        #restartButton {
+          position: absolute;
+          left: 0px;
+          top: 0px;
+        }
     </style>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   </head> 
   <body style="overflow: hidden;">
     <div id="container"></div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 id="modalTitle" class="modal-title">Get the block to the end</h4>
+          </div>
+          <div class="modal-body">
+            <p id="modalMessage">Use wasd or the arrow keys to control the player</p>
+          </div>
+          <div class="modal-footer">
+            <button id="modalButton" type="button" data-dismiss="modal" class="btn btn-primary">Got it!</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <button id="restartButton" type="button" data-dismiss="modal" class="btn btn-primary">Start Over</button>
   	<script src="js/lib/three.min.js"></script> 
     <script src="js/lib/stats.min.js"></script>
     <script src="js/lib/priority-queue-min.js"></script>
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/bootstrap.min.js"></script>
     <script src="js/sprite.js"></script>
     <script src="js/input.js"></script>
     <script src="textures/player/player.js"></script>
@@ -22,6 +48,9 @@
     <script src="textures/rollerVert/rollerVert.js"></script>
     <script src="textures/tree/tree.js"></script>
     <script src="textures/ground/ground.js"></script>
+    <script src="textures/longGround/longGround.js"></script>
+    <script src="textures/finish/finish.js"></script>
+    <script src="js/levels.js"></script>
     <script src="js/components.js"></script>
     <script src="js/systems.js"></script>
     <script src="js/entities.js"></script>

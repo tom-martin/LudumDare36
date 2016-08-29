@@ -7,6 +7,12 @@ function SpriteComponent() {
     this.sprite = null;
 }
 
+function PlayerComponent() {
+    this.isPushing = false;
+    this.completionTimer = 0;
+    this.levelComplete = false;
+}
+
 function PositionComponent() {
     this.position = new THREE.Vector3();
     this.rotation = new THREE.Euler( 0, 0, 0, 'XYZ' );

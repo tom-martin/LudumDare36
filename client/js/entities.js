@@ -20,7 +20,28 @@ var createGroundTile = function(scene, x, y, threeJsSystem) {
 	entity.spriteComponent = new SpriteComponent();
 	entity.spriteComponent.sprite = sprite;
 
-	entity.positionComponent.position.set(x, y, -0.001);
+	entity.positionComponent.position.set(x, y, -0.01);
+
+	scene.add(entity.threeJsComponent.mesh);
+
+	return entity;
+}
+
+var createLongGroundTile = function(scene, x, y, threeJsSystem) {
+	var entity = {};
+	var sprite = new Sprite(4, (704/128)*4, scene, Textures.longGroundSheet, "longGround", 1, null);
+
+	entity.threeJsComponent = new ThreeJsComponent();
+	entity.threeJsComponent.mesh = sprite.mesh;
+	entity.threeJsComponent.renderOrderOffset = -100;
+	threeJsSystem.entities.push(entity);
+	entity.positionComponent = new PositionComponent();
+	entity.positionComponent.position.set(x, y, 0);
+
+	entity.spriteComponent = new SpriteComponent();
+	entity.spriteComponent.sprite = sprite;
+
+	entity.positionComponent.position.set(x, y, -0.01);
 
 	scene.add(entity.threeJsComponent.mesh);
 
@@ -30,7 +51,7 @@ var createGroundTile = function(scene, x, y, threeJsSystem) {
 var createPlayer = function(scene, x, y, playerSystem, threeJsSystem) {
 	var entity = {};
 
-	var sprite = new Sprite(1, 2, scene, Textures.playerSheet, "playerSouth", 1, null);
+	var sprite = new Sprite(64/45, 2, scene, Textures.playerSheet, "playerSouth", 1, null);
 
 	entity.threeJsComponent = new ThreeJsComponent();
 	entity.threeJsComponent.mesh = sprite.mesh;
@@ -43,6 +64,8 @@ var createPlayer = function(scene, x, y, playerSystem, threeJsSystem) {
 	entity.spriteComponent.sprite = sprite;
 
 	scene.add(entity.threeJsComponent.mesh);
+
+	entity.playerComponent = new PlayerComponent();
 
 	entity.collisionComponent = new CollisionComponent();
 	entity.collisionComponent.halfWidth = 0.5;
@@ -101,6 +124,30 @@ var createBlock = function(scene, x, y, playerSystem, threeJsSystem) {
 
 	playerSystem.playerCollisionEntities.push(entity);
 	playerSystem.blockEntity = entity;
+
+	scene.add(entity.threeJsComponent.mesh);
+
+	return entity;
+}
+
+var createFinish = function(scene, x, y, playerSystem, threeJsSystem) {
+	var entity = {};
+
+	entity.collisionComponent = new CollisionComponent();
+	entity.collisionComponent.halfWidth = 2;
+	entity.collisionComponent.halfHeight = 2;
+	entity.collisionComponent.isBlock = true;
+
+	var sprite = new Sprite(4, 4, scene, Textures.finishSheet, "finish", 1, null);
+	
+	entity.threeJsComponent = new ThreeJsComponent();
+	entity.threeJsComponent.mesh = sprite.mesh;
+	threeJsSystem.entities.push(entity);
+
+	entity.positionComponent = new PositionComponent();
+	entity.positionComponent.position.set(x, y, -0.001);
+
+	playerSystem.finishEntity = entity;
 
 	scene.add(entity.threeJsComponent.mesh);
 
