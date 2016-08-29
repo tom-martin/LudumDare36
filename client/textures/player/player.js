@@ -3,8 +3,8 @@ if(typeof Textures === 'undefined') {
 };
 
 Textures.playerSheet = {
- "xScale": 0.17578125,
- "yScale": 0.25,
+ "xScale": 0.087890625,
+ "yScale": 0.125,
  "anims": {
   "playerEast": {
    "frames": [
@@ -18,11 +18,11 @@ Textures.playerSheet = {
   "playerEastChop": {
    "frames": [
     {
-     "x": 0.1796875,
+     "x": 0.08984375,
      "y": 0
     },
     {
-     "x": 0.359375,
+     "x": 0.1796875,
      "y": 0
     }
    ],
@@ -31,7 +31,20 @@ Textures.playerSheet = {
   "playerNorth": {
    "frames": [
     {
-     "x": 0.5390625,
+     "x": 0.26953125,
+     "y": 0
+    }
+   ],
+   "frameLength": 84
+  },
+  "playerNorthChop": {
+   "frames": [
+    {
+     "x": 0.359375,
+     "y": 0
+    },
+    {
+     "x": 0.44921875,
      "y": 0
     }
    ],
@@ -40,7 +53,7 @@ Textures.playerSheet = {
   "playerPushEast": {
    "frames": [
     {
-     "x": 0.71875,
+     "x": 0.5390625,
      "y": 0
     }
    ],
@@ -49,8 +62,8 @@ Textures.playerSheet = {
   "playerPushNorth": {
    "frames": [
     {
-     "x": 0,
-     "y": 0.25390625
+     "x": 0.62890625,
+     "y": 0
     }
    ],
    "frameLength": 84
@@ -58,8 +71,8 @@ Textures.playerSheet = {
   "playerPushSouth": {
    "frames": [
     {
-     "x": 0.1796875,
-     "y": 0.25390625
+     "x": 0.71875,
+     "y": 0
     }
    ],
    "frameLength": 84
@@ -67,8 +80,8 @@ Textures.playerSheet = {
   "playerPushWest": {
    "frames": [
     {
-     "x": 0.359375,
-     "y": 0.25390625
+     "x": 0.80859375,
+     "y": 0
     }
    ],
    "frameLength": 84
@@ -76,8 +89,21 @@ Textures.playerSheet = {
   "playerSouth": {
    "frames": [
     {
-     "x": 0.5390625,
-     "y": 0.25390625
+     "x": 0.8984375,
+     "y": 0
+    }
+   ],
+   "frameLength": 84
+  },
+  "playerSouthChop": {
+   "frames": [
+    {
+     "x": 0,
+     "y": 0.126953125
+    },
+    {
+     "x": 0.08984375,
+     "y": 0.126953125
     }
    ],
    "frameLength": 84
@@ -85,8 +111,21 @@ Textures.playerSheet = {
   "playerWest": {
    "frames": [
     {
-     "x": 0.71875,
-     "y": 0.25390625
+     "x": 0.1796875,
+     "y": 0.126953125
+    }
+   ],
+   "frameLength": 84
+  },
+  "playerWestChop": {
+   "frames": [
+    {
+     "x": 0.26953125,
+     "y": 0.126953125
+    },
+    {
+     "x": 0.359375,
+     "y": 0.126953125
     }
    ],
    "frameLength": 84

@@ -14,6 +14,15 @@ Textures.rockSheet = {
     }
    ],
    "frameLength": 84
+  },
+  "rockCracked": {
+   "frames": [
+    {
+     "x": 0.37890625,
+     "y": 0
+    }
+   ],
+   "frameLength": 84
   }
  },
  "textureLocation": "textures/rock/rock.png"

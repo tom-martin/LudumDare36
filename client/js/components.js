@@ -11,6 +11,13 @@ function PlayerComponent() {
     this.isPushing = false;
     this.completionTimer = 0;
     this.levelComplete = false;
+
+    this.chopTimer = 0;
+    this.isChopping = false;
+
+    this.failing = false;
+    this.failTimer = 0;
+    this.failed = false;
 }
 
 function PositionComponent() {

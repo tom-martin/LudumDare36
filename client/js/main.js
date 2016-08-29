@@ -54,9 +54,9 @@ var threeJsSystem = null;
 var playerSystem = null;
 var threeCamera = null;
 var player = null;
-var levelIndex = 0;
+var levelIndex = 5;
 
-function initGame() {
+function initGame(keepText) {
     var level = levels[levelIndex];
     scene = new THREE.Scene();
     scene.background = new THREE.Color( 0xd5f4ff );
@@ -113,14 +113,17 @@ function initGame() {
         }
     }
 
-    if(level.levelTitle != null) {
-        $('#modalTitle').text(level.levelTitle);    
-    }
-    if(level.levelMessage != null) {
-        $('#modalMessage').text(level.levelMessage);    
-    }
-    if(level.buttonText != null) {
-        $('#modalButton').text(level.buttonText);    
+    if(!keepText) {
+
+        if(level.levelTitle != null) {
+            $('#modalTitle').text(level.levelTitle);    
+        }
+        if(level.levelMessage != null) {
+            $('#modalMessage').text(level.levelMessage);    
+        }
+        if(level.buttonText != null) {
+            $('#modalButton').text(level.buttonText);    
+        }
     }
     $('#myModal').modal('show');
     respondToResize();
@@ -146,8 +149,16 @@ function render(t) {
             $('#modalTitle').text('CONGRATULATIONS!');
             $('#modalMessage').text('YOU FINISHED ALL THE LEVELS!');    
             $('#modalButton').text('PLAY AGAIN!'); 
-            initGame();
+            initGame(true);
         }
+    }
+
+    if(player.playerComponent.failed) {
+        $('#modalTitle').text('YOU BROKE YOUR ROCK!');
+        $('#modalMessage').text('TRY AND KEEP IT ON TWO LOGS AT ALL TIMES!');    
+        $('#modalButton').text('TRY AGAIN ...'); 
+        initGame(true);
+        
     }
 
     stats.end();

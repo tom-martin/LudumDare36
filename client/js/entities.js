@@ -122,6 +122,9 @@ var createBlock = function(scene, x, y, playerSystem, threeJsSystem) {
 	entity.positionComponent = new PositionComponent();
 	entity.positionComponent.position.set(x, y, -0.00001);
 
+	entity.spriteComponent = new SpriteComponent();
+	entity.spriteComponent.sprite = sprite;
+
 	playerSystem.playerCollisionEntities.push(entity);
 	playerSystem.blockEntity = entity;
 
