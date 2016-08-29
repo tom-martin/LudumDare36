@@ -1,6 +1,7 @@
 function ThreeJsComponent() {
     this.mesh = null;
     this.positionOffset = new THREE.Vector3();
+    this.renderOrderOffset = 0;
 }
 
 function SpriteComponent() {

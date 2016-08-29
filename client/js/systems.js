@@ -13,6 +13,7 @@ function ThreeJsSystem() {
             }
 
             entity.threeJsComponent.mesh.renderOrder = -entity.threeJsComponent.mesh.position.y;
+            entity.threeJsComponent.mesh.renderOrder += entity.threeJsComponent.renderOrderOffset;
         }
     }
 }

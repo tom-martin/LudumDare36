@@ -37,6 +37,7 @@ var createLongGroundTile = function(scene, x, y, threeJsSystem) {
 	threeJsSystem.entities.push(entity);
 	entity.positionComponent = new PositionComponent();
 	entity.positionComponent.position.set(x, y, 0);
+	entity.threeJsComponent.renderOrderOffset = 10000;
 
 	entity.spriteComponent = new SpriteComponent();
 	entity.spriteComponent.sprite = sprite;
@@ -145,6 +146,7 @@ var createFinish = function(scene, x, y, playerSystem, threeJsSystem) {
 	
 	entity.threeJsComponent = new ThreeJsComponent();
 	entity.threeJsComponent.mesh = sprite.mesh;
+	entity.threeJsComponent.renderOrderOffset = 100;
 	threeJsSystem.entities.push(entity);
 
 	entity.positionComponent = new PositionComponent();
@@ -181,6 +183,7 @@ var createRoller = function(scene, horizontal, x, y, playerSystem, threeJsSystem
 	entity.collisionComponent.isRoller = true;
 	threeJsSystem.entities.push(entity);
 	entity.positionComponent = new PositionComponent();
+	entity.threeJsComponent.renderOrderOffset = 1000;
 
 	entity.positionComponent.position.set(x, y, -0.0001);
 
