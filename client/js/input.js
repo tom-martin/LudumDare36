@@ -19,16 +19,16 @@ function Input(threeCamera, blockMesh) {
     }
 
     function handleKeyPress(e, down) {
-        if(e.keyCode==87) {
+        if(e.keyCode==87 || e.keyCode==38) {
             handleButtonInteraction(e, down, self.north);
         }
-        if(e.keyCode==68) {
+        if(e.keyCode==68 || e.keyCode==39) {
             handleButtonInteraction(e, down, self.east);
         }
-        if(e.keyCode==83) {
+        if(e.keyCode==83 || e.keyCode==40) {
             handleButtonInteraction(e, down, self.south);
         }
-        if(e.keyCode==65) {
+        if(e.keyCode==65 || e.keyCode==37) {
             handleButtonInteraction(e, down, self.west);
         }
 
