@@ -1,3 +1,6 @@
+// instantiate a loader
+var textureLoader = new THREE.TextureLoader();
+
 function Sprite(width, height, scene, sheet, initialAnimName, opacity, texture) {
 	var scope = this;
 	this.setAnim = function(animName) {
@@ -26,7 +29,7 @@ function Sprite(width, height, scene, sheet, initialAnimName, opacity, texture) 
 
     var newTexture = null;
     if(!texture) {
-    	newTexture = THREE.ImageUtils.loadTexture(sheet.textureLocation);
+    	newTexture = textureLoader.load(sheet.textureLocation);
         newTexture.wrapS = newTexture.wrapT = THREE.RepeatWrapping; 
         newTexture.repeat.set( sheet.xScale, sheet.yScale);
         newTexture.magFilter = THREE.NearestFilter;

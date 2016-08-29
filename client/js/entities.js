@@ -1,14 +1,31 @@
 
-var woodTexture = THREE.ImageUtils.loadTexture( "textures/wood_log.png" );
-woodTexture.magFilter = THREE.NearestFilter;
-woodTexture.minFilter = THREE.NearestFilter;
+var createGroundTile = function(scene, x, y, threeJsSystem) {
+	var entity = {};
 
-var rockTexture = THREE.ImageUtils.loadTexture( "textures/rock_sml.png" );
-rockTexture.magFilter = THREE.NearestFilter;
-rockTexture.minFilter = THREE.NearestFilter;
+	var anim = "ground1";
+	if(Math.random() < 0.5) {
+		anim = "ground2";
+	}
+	var sprite = new Sprite(2, 2, scene, Textures.groundSheet, anim, 1, null);
+	sprite.setAnim(anim);
+	sprite.update(0);
 
-rockTexture.wrapS = rockTexture.wrapT = THREE.RepeatWrapping;
-rockTexture.repeat.set( 3, 1 );
+	entity.threeJsComponent = new ThreeJsComponent();
+	entity.threeJsComponent.mesh = sprite.mesh;
+	entity.threeJsComponent.renderOrderOffset = -100;
+	threeJsSystem.entities.push(entity);
+	entity.positionComponent = new PositionComponent();
+	entity.positionComponent.position.set(x, y, 0);
+
+	entity.spriteComponent = new SpriteComponent();
+	entity.spriteComponent.sprite = sprite;
+
+	entity.positionComponent.position.set(x, y, -0.001);
+
+	scene.add(entity.threeJsComponent.mesh);
+
+	return entity;
+}
 
 var createPlayer = function(scene, x, y, playerSystem, threeJsSystem) {
 	var entity = {};

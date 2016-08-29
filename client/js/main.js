@@ -81,6 +81,11 @@ function initGame() {
     createPlayer(scene, 2, -7, playerSystem, threeJsSystem);
 
     createBlock(scene, 3, -5, playerSystem, threeJsSystem);
+    for(var x = -10; x < 10; x+=2) {
+        for(var y = -10; y < 10; y+=2) {
+            createGroundTile(scene, x, y, threeJsSystem);
+        }
+    }
 
     createRoller(scene, true, 3, -6, playerSystem, threeJsSystem);
     createRoller(scene, true, 3, -4, playerSystem, threeJsSystem);
