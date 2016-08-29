@@ -36,7 +36,8 @@ var levels = [
 		],
 		levelTitle: "LEVEL THREE",
 		levelMessage: "USE THE SPACEBAR TO CUT DOWN TREES.",
-		buttonText: "CHOP CHOP!"
+		buttonText: "CHOP CHOP!",
+		instructImage: "gifs/chop.gif"
 	}
 	,
 	{

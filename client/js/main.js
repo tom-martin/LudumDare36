@@ -46,7 +46,7 @@ var respondToResize = function() {
     if(renderer != null) {
         renderer.setSize( window.innerWidth, window.innerHeight );
     }
-    $("#restartButton").css({top: window.innerHeight-50, left: (window.innerWidth/2)-50, position:'absolute'});
+    $("#restartButton").css({top: window.innerHeight-50, left: (window.innerWidth/2)-65, position:'absolute'});
 }
 
 
@@ -118,6 +118,13 @@ function initGame(keepText) {
 
     if(!keepText) {
 
+        if(level.instructImage != null) {
+            $('.instructGif').attr("src", level.instructImage);
+            $('.instructGif').show();
+        } else {
+            $('.instructGif').hide();
+
+        }
         if(level.levelTitle != null) {
             $('#modalTitle').text(level.levelTitle);    
         }
@@ -151,6 +158,7 @@ function render(t) {
             levelIndex = 0;
             $('#modalTitle').text('CONGRATULATIONS!');
             $('#modalMessage').text('YOU FINISHED ALL THE LEVELS!');    
+            $('.instructGif').hide();
             $('#modalButton').text('PLAY AGAIN!'); 
             initGame(true);
         }
@@ -159,6 +167,7 @@ function render(t) {
     if(player.playerComponent.failed) {
         $('#modalTitle').text('YOU BROKE YOUR ROCK!');
         $('#modalMessage').text('TRY AND KEEP IT ON TWO PARALLEL LOGS AT ALL TIMES!');    
+        $('.instructGif').hide();
         $('#modalButton').text('TRY AGAIN ...'); 
         initGame(true);
         
@@ -168,7 +177,7 @@ function render(t) {
 }
 
 $(function() {
-    initGame();
+    initGame(true);
     window.addEventListener("resize", respondToResize);
     requestAnimationFrame(render);
 
