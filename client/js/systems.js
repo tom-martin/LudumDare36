@@ -11,6 +11,8 @@ function ThreeJsSystem() {
                 entity.threeJsComponent.mesh.position.add(entity.threeJsComponent.positionOffset);
                 entity.threeJsComponent.mesh.rotation.copy(entity.positionComponent.rotation);
             }
+
+            entity.threeJsComponent.mesh.renderOrder = -entity.threeJsComponent.mesh.position.y;
         }
     }
 }
@@ -70,10 +72,12 @@ function PlayerSystem(input) {
             requiredMove.set(0, 0, 0);
         }
 
+        var actualMove = tryAndMove(rockEntity, requiredMove, true);
+
         if(requiredMove.lengthSq() > 0) {
             var halfMove = new THREE.Vector3();
-            halfMove.copy(requiredMove);
-            halfMove.divideScalar(2);
+            halfMove.copy(actualMove);
+            halfMove.multiplyScalar(0.6);
             for(var i in self.playerCollisionEntities) {
                 var otherEntity = self.playerCollisionEntities[i];
                 var colComp = otherEntity.collisionComponent;
@@ -87,9 +91,7 @@ function PlayerSystem(input) {
             }
         }
 
-        currentPosition.add(requiredMove);
-
-        return requiredMove;
+        return actualMove;
     }
 
     var doEntitiesCollide = function(posA, colA, posB, colB) {
@@ -101,7 +103,7 @@ function PlayerSystem(input) {
                 )
     }
 
-    var tryAndMove = function(moveEntity, requiredMove) {
+    var tryAndMove = function(moveEntity, requiredMove, skipRollers) {
         var nextPosition = new THREE.Vector3();
         var nextMove = new THREE.Vector3();
         nextMove.copy(requiredMove);
@@ -122,6 +124,7 @@ function PlayerSystem(input) {
 
             if(otherEntity != moveEntity) {
                 if(moveEntity == self.player && colComp.isUnderBlock) continue;
+                if(skipRollers && colComp.isRoller) continue;
 
                 var pos = otherEntity.positionComponent.position;
                 if(doEntitiesCollide(nextPosition, moveColComp, pos, colComp)) {

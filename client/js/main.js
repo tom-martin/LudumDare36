@@ -79,16 +79,14 @@ function initGame() {
     threeCamera.lookAt(new THREE.Vector3(0, 0, 0));
 
     createPlayer(scene, playerSystem, threeJsSystem);
-    createRoller(scene, true, 2, 2, playerSystem, threeJsSystem);
-    createRoller(scene, false, 3, -1, playerSystem, threeJsSystem);
 
-    createRoller(scene, true, 3, 4, playerSystem, threeJsSystem);
-    createRoller(scene, false, 5, -1, playerSystem, threeJsSystem);
+    createBlock(scene, 3, -5, playerSystem, threeJsSystem);
 
-    createBlock(scene, 0, -5, playerSystem, threeJsSystem);
-
-    createRoller(scene, true, 0, -6, playerSystem, threeJsSystem);
-    createRoller(scene, true, 0, -4, playerSystem, threeJsSystem);
+    createRoller(scene, true, 3, -6, playerSystem, threeJsSystem);
+    createRoller(scene, true, 3, -4, playerSystem, threeJsSystem);
+    createRoller(scene, true, 3, -2, playerSystem, threeJsSystem);
+    createRoller(scene, true, 3, 2, playerSystem, threeJsSystem);
+    createTree(scene, 3, 5, playerSystem, threeJsSystem);
 }
 
 function render(t) {

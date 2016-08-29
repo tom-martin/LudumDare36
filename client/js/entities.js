@@ -35,6 +35,34 @@ var createPlayer = function(scene, playerSystem, threeJsSystem) {
 	return entity;
 }
 
+var createTree = function(scene, x, y, playerSystem, threeJsSystem) {
+	var entity = {};
+
+	var sprite = new Sprite(2, 4, scene, Textures.treeSheet, "tree", 1, null);
+
+	entity.threeJsComponent = new ThreeJsComponent();
+	entity.threeJsComponent.mesh = sprite.mesh;
+	threeJsSystem.entities.push(entity);
+	entity.positionComponent = new PositionComponent();
+	entity.positionComponent.position.set(x, y, 0);
+
+	entity.spriteComponent = new SpriteComponent();
+	entity.spriteComponent.sprite = sprite;
+
+	scene.add(entity.threeJsComponent.mesh);
+
+	entity.collisionComponent = new CollisionComponent();
+	entity.collisionComponent.halfWidth = 1;
+	entity.collisionComponent.halfHeight = 1;
+	entity.threeJsComponent.positionOffset.y += 1;
+	entity.collisionComponent.canMoveVertically = false;
+	entity.collisionComponent.canMoveHorizontally = false;
+
+	playerSystem.playerCollisionEntities.push(entity);
+
+	return entity;
+}
+
 var createBlock = function(scene, x, y, playerSystem, threeJsSystem) {
 	var entity = {};
 	var geom = new THREE.PlaneGeometry( 3, 3);
@@ -61,24 +89,26 @@ var createBlock = function(scene, x, y, playerSystem, threeJsSystem) {
 
 var createRoller = function(scene, horizontal, x, y, playerSystem, threeJsSystem) {
 	var entity = {};
-	var geom = null;
+
+
+	entity.threeJsComponent = new ThreeJsComponent();
 	entity.collisionComponent = new CollisionComponent();
 	if(horizontal) {
-		geom = new THREE.PlaneGeometry( 4, 0.5);
 		entity.collisionComponent.halfWidth = 2;
 		entity.collisionComponent.halfHeight = 0.25;
 		entity.collisionComponent.canMoveHorizontally = false;
+
+		var sprite = new Sprite(4, 1, scene, Textures.rollerSheet, "roller", 1, null);
+		entity.threeJsComponent.mesh = sprite.mesh;
 	} else  {
-		geom = new THREE.PlaneGeometry( 0.5, 4);
 		entity.collisionComponent.halfWidth = 0.25;
 		entity.collisionComponent.halfHeight = 2;
 		entity.collisionComponent.canMoveVertically = false;
+
+		var sprite = new Sprite(1, 4, scene, Textures.rollerVertSheet, "rollerVert", 1, null);
+		entity.threeJsComponent.mesh = sprite.mesh;
 	}
 	entity.collisionComponent.isRoller = true;
-
-	var mat = new THREE.MeshBasicMaterial({color: 0xFFaa00});
-	entity.threeJsComponent = new ThreeJsComponent();
-	entity.threeJsComponent.mesh = new THREE.Mesh( geom, mat );
 	threeJsSystem.entities.push(entity);
 	entity.positionComponent = new PositionComponent();
 
