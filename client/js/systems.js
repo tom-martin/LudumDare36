@@ -17,7 +17,7 @@ function ThreeJsSystem() {
     }
 }
 
-function PlayerSystem(input) {
+function PlayerSystem(input, scene, threeJsSystem) {
     var self = this;
     self.player = null;
     self.blockEntity = null;
@@ -40,11 +40,7 @@ function PlayerSystem(input) {
             if(colComp.isRoller) {
                 var pos = otherEntity.positionComponent.position;
                 
-                if(!(currentPosition.x + moveColComp.halfWidth <= pos.x-colComp.halfWidth ||
-                     currentPosition.x - moveColComp.halfWidth >= pos.x+colComp.halfWidth ||
-                     currentPosition.y + moveColComp.halfHeight <= pos.y-colComp.halfHeight ||
-                     currentPosition.y - moveColComp.halfHeight >= pos.y+colComp.halfHeight
-                    )) {
+                if(colComp.isUnderBlock) {
                     if(colComp.canMoveVertically) {
                         canMoveVertically = true;
                         totalCount ++;
@@ -81,12 +77,8 @@ function PlayerSystem(input) {
             for(var i in self.playerCollisionEntities) {
                 var otherEntity = self.playerCollisionEntities[i];
                 var colComp = otherEntity.collisionComponent;
-                if(colComp.isRoller) {
-                    var pos = otherEntity.positionComponent.position;
-                    
-                    if(doEntitiesCollide(currentPosition, moveColComp, pos, colComp)) {
-                        tryAndMove(otherEntity, halfMove);   
-                    }
+                if(colComp.isRoller && colComp.isUnderBlock) {
+                    tryAndMove(otherEntity, halfMove);   
                 }
             }
         }
@@ -123,11 +115,24 @@ function PlayerSystem(input) {
             var colComp = otherEntity.collisionComponent;
 
             if(otherEntity != moveEntity) {
+                if(!colComp.active) continue;
                 if(moveEntity == self.player && colComp.isUnderBlock) continue;
                 if(skipRollers && colComp.isRoller) continue;
 
                 var pos = otherEntity.positionComponent.position;
                 if(doEntitiesCollide(nextPosition, moveColComp, pos, colComp)) {
+                    if(moveEntity == self.player && colComp.isTree && input.chop.down) {
+                        colComp.active = false;
+                        otherEntity.threeJsComponent.mesh.visible = false;
+                        var horizontal = requiredMove.x != 0;
+                        var moveLog = requiredMove.clone();
+                        moveLog.normalize();
+                        moveLog.multiplyScalar(2);
+                        createRoller(scene, horizontal, pos.x+moveLog.x, pos.y+moveLog.y, self, threeJsSystem);
+                        input.chop.clear();
+                        continue;
+                    }
+
                     var moveTheOtherGuy = new THREE.Vector3();
                     if(nextMove.x > 0) {
                         moveTheOtherGuy.x = (nextPosition.x+moveColComp.halfWidth) - (pos.x-colComp.halfWidth);
@@ -147,7 +152,12 @@ function PlayerSystem(input) {
                             actualMove = moveTheOtherGuy;
                         }
                     } else {
-                        actualMove = tryAndMove(otherEntity, moveTheOtherGuy);
+                        
+                        if(moveColComp.isRoller && colComp.isRoller && moveColComp.canMoveVertically == colComp.canMoveHorizontally) {
+                            actualMove = moveTheOtherGuy
+                        } else {
+                            actualMove = tryAndMove(otherEntity, moveTheOtherGuy);
+                        }
                     }
                     nextMove.add(actualMove);
 

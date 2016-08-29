@@ -72,7 +72,7 @@ function initGame() {
     input = new Input();
     lastFrameTime = 0;
     threeJsSystem = new ThreeJsSystem();
-    playerSystem = new PlayerSystem(input);
+    playerSystem = new PlayerSystem(input, scene, threeJsSystem);
 
     threeCamera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.5, 1000 );
     threeCamera.position.set(0, 0, 20);

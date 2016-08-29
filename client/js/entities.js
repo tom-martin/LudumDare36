@@ -57,6 +57,7 @@ var createTree = function(scene, x, y, playerSystem, threeJsSystem) {
 	entity.threeJsComponent.positionOffset.y += 1;
 	entity.collisionComponent.canMoveVertically = false;
 	entity.collisionComponent.canMoveHorizontally = false;
+	entity.collisionComponent.isTree = true;
 
 	playerSystem.playerCollisionEntities.push(entity);
 
@@ -65,18 +66,19 @@ var createTree = function(scene, x, y, playerSystem, threeJsSystem) {
 
 var createBlock = function(scene, x, y, playerSystem, threeJsSystem) {
 	var entity = {};
-	var geom = new THREE.PlaneGeometry( 3, 3);
+
 	entity.collisionComponent = new CollisionComponent();
 	entity.collisionComponent.halfWidth = 1.5;
 	entity.collisionComponent.halfHeight = 1.5;
 	entity.collisionComponent.isBlock = true;
-	
-	var mat = new THREE.MeshBasicMaterial({color: 0x404040});
-	entity.threeJsComponent = new ThreeJsComponent();
-	entity.threeJsComponent.mesh = new THREE.Mesh( geom, mat );
-	threeJsSystem.entities.push(entity);
-	entity.positionComponent = new PositionComponent();
 
+	var sprite = new Sprite(3, 3, scene, Textures.rockSheet, "rock", 1, null);
+	
+	entity.threeJsComponent = new ThreeJsComponent();
+	entity.threeJsComponent.mesh = sprite.mesh;
+	threeJsSystem.entities.push(entity);
+
+	entity.positionComponent = new PositionComponent();
 	entity.positionComponent.position.set(x, y, -0.00001);
 
 	playerSystem.playerCollisionEntities.push(entity);

@@ -23,7 +23,9 @@ function CollisionComponent() {
     this.canMoveHorizontally = true;
     this.isBlock = false;
     this.isRoller = false;
+    this.isTree = false;
     this.isUnderBlock = false;
+    this.active = true;
 }
 
 function CameraComponent() {

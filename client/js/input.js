@@ -5,6 +5,7 @@ function Input(threeCamera, blockMesh) {
     self.south = new InputButton("south");
     self.east = new InputButton("east");
     self.west = new InputButton("west");
+    self.chop = new InputButton("chop");
 
     function handleButtonInteraction(e, down, button) {
         if(down) {
@@ -29,6 +30,10 @@ function Input(threeCamera, blockMesh) {
         }
         if(e.keyCode==65) {
             handleButtonInteraction(e, down, self.west);
+        }
+
+        if(e.keyCode==32) {
+            handleButtonInteraction(e, down, self.chop);
         }
     }
 
