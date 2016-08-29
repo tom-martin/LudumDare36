@@ -10,7 +10,7 @@ rockTexture.minFilter = THREE.NearestFilter;
 rockTexture.wrapS = rockTexture.wrapT = THREE.RepeatWrapping;
 rockTexture.repeat.set( 3, 1 );
 
-var createPlayer = function(scene, playerSystem, threeJsSystem) {
+var createPlayer = function(scene, x, y, playerSystem, threeJsSystem) {
 	var entity = {};
 
 	var sprite = new Sprite(1, 2, scene, Textures.playerSheet, "playerSouth", 1, null);
@@ -20,6 +20,7 @@ var createPlayer = function(scene, playerSystem, threeJsSystem) {
 	entity.threeJsComponent.positionOffset.y += 0.5;
 	threeJsSystem.entities.push(entity);
 	entity.positionComponent = new PositionComponent();
+	entity.positionComponent.position.set(x, y, 0);
 
 	entity.spriteComponent = new SpriteComponent();
 	entity.spriteComponent.sprite = sprite;

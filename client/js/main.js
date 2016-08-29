@@ -75,10 +75,10 @@ function initGame() {
     playerSystem = new PlayerSystem(input, scene, threeJsSystem);
 
     threeCamera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.5, 1000 );
-    threeCamera.position.set(0, 0, 20);
+    threeCamera.position.set(0, 0, 35);
     threeCamera.lookAt(new THREE.Vector3(0, 0, 0));
 
-    createPlayer(scene, playerSystem, threeJsSystem);
+    createPlayer(scene, 2, -7, playerSystem, threeJsSystem);
 
     createBlock(scene, 3, -5, playerSystem, threeJsSystem);
 
