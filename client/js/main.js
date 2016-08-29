@@ -176,6 +176,9 @@ function render(t) {
     stats.end();
 }
 
+new Image().src = 'gifs/walk.gif';
+new Image().src = 'gifs/chop.gif';
+
 $(function() {
     initGame(true);
     window.addEventListener("resize", respondToResize);

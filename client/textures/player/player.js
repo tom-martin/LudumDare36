@@ -11,25 +11,20 @@ Textures.playerSheet = {
     {
      "x": 0,
      "y": 0
+    },
+    {
+     "x": 0.08984375,
+     "y": 0
     }
    ],
-   "frameLength": 84
+   "frameLength": 200
   },
   "playerEastChop": {
    "frames": [
     {
-     "x": 0.08984375,
-     "y": 0
-    },
-    {
      "x": 0.1796875,
      "y": 0
-    }
-   ],
-   "frameLength": 84
-  },
-  "playerNorth": {
-   "frames": [
+    },
     {
      "x": 0.26953125,
      "y": 0
@@ -37,7 +32,7 @@ Textures.playerSheet = {
    ],
    "frameLength": 84
   },
-  "playerNorthChop": {
+  "playerNorth": {
    "frames": [
     {
      "x": 0.359375,
@@ -48,19 +43,14 @@ Textures.playerSheet = {
      "y": 0
     }
    ],
-   "frameLength": 84
+   "frameLength": 200
   },
-  "playerPushEast": {
+  "playerNorthChop": {
    "frames": [
     {
      "x": 0.5390625,
      "y": 0
-    }
-   ],
-   "frameLength": 84
-  },
-  "playerPushNorth": {
-   "frames": [
+    },
     {
      "x": 0.62890625,
      "y": 0
@@ -68,7 +58,7 @@ Textures.playerSheet = {
    ],
    "frameLength": 84
   },
-  "playerPushSouth": {
+  "playerPushEast": {
    "frames": [
     {
      "x": 0.71875,
@@ -77,7 +67,7 @@ Textures.playerSheet = {
    ],
    "frameLength": 84
   },
-  "playerPushWest": {
+  "playerPushNorth": {
    "frames": [
     {
      "x": 0.80859375,
@@ -86,7 +76,7 @@ Textures.playerSheet = {
    ],
    "frameLength": 84
   },
-  "playerSouth": {
+  "playerPushSouth": {
    "frames": [
     {
      "x": 0.8984375,
@@ -95,14 +85,36 @@ Textures.playerSheet = {
    ],
    "frameLength": 84
   },
-  "playerSouthChop": {
+  "playerPushWest": {
    "frames": [
     {
      "x": 0,
      "y": 0.126953125
-    },
+    }
+   ],
+   "frameLength": 84
+  },
+  "playerSouth": {
+   "frames": [
     {
      "x": 0.08984375,
+     "y": 0.126953125
+    },
+    {
+     "x": 0.1796875,
+     "y": 0.126953125
+    }
+   ],
+   "frameLength": 200
+  },
+  "playerSouthChop": {
+   "frames": [
+    {
+     "x": 0.26953125,
+     "y": 0.126953125
+    },
+    {
+     "x": 0.359375,
      "y": 0.126953125
     }
    ],
@@ -111,20 +123,24 @@ Textures.playerSheet = {
   "playerWest": {
    "frames": [
     {
-     "x": 0.1796875,
+     "x": 0.44921875,
+     "y": 0.126953125
+    },
+    {
+     "x": 0.5390625,
      "y": 0.126953125
     }
    ],
-   "frameLength": 84
+   "frameLength": 200
   },
   "playerWestChop": {
    "frames": [
     {
-     "x": 0.26953125,
+     "x": 0.62890625,
      "y": 0.126953125
     },
     {
-     "x": 0.359375,
+     "x": 0.71875,
      "y": 0.126953125
     }
    ],

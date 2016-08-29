@@ -286,9 +286,6 @@ function PlayerSystem(input, scene, threeJsSystem) {
                 sprite.setAnim("playerWest");
             }
         }
-        
-
-        sprite.update(now);
 
         if( this.player.playerComponent.isChopping && 
             !this.player.playerComponent.isPushing &&
@@ -317,18 +314,24 @@ function PlayerSystem(input, scene, threeJsSystem) {
             this.player.playerComponent.isPushing = false;
             var actualMove = tryAndMove(this.player, nextMove);
 
-            if(!this.player.playerComponent.isPushing && actualMove.lengthSq() > 0) {
-                this.player.threeJsComponent.positionOffset.y += bobDir*tick;
-                if(this.player.threeJsComponent.positionOffset.y > 0.65) {
-                    this.player.threeJsComponent.positionOffset.y = 0.65;
-                    bobDir = -2;
-                } else if(this.player.threeJsComponent.positionOffset.y < 0.35) {
-                    this.player.threeJsComponent.positionOffset.y = 0.35;
-                    bobDir = 2;
-                }
-            } else {
-                this.player.threeJsComponent.positionOffset.y = 0.5;
+            if(this.player.playerComponent.isChopping ||
+              this.player.playerComponent.isPushing ||
+              nextMove.lengthSq() > 0) {
+                sprite.update(now);
             }
+
+            // if(!this.player.playerComponent.isPushing && actualMove.lengthSq() > 0) {
+            //     this.player.threeJsComponent.positionOffset.y += bobDir*tick;
+            //     if(this.player.threeJsComponent.positionOffset.y > 0.65) {
+            //         this.player.threeJsComponent.positionOffset.y = 0.65;
+            //         bobDir = -2;
+            //     } else if(this.player.threeJsComponent.positionOffset.y < 0.35) {
+            //         this.player.threeJsComponent.positionOffset.y = 0.35;
+            //         bobDir = 2;
+            //     }
+            // } else {
+            //     this.player.threeJsComponent.positionOffset.y = 0.5;
+            // }
         }
     }
 }
