@@ -195,6 +195,8 @@ function PlayerSystem(input, scene, threeJsSystem) {
 
     var lastMovementMove = new THREE.Vector3();
 
+    var bobDir = 1.5;
+
     this.update = function(now, tick) {
         var nextMove = new THREE.Vector3(0, 0, 0);
 
@@ -312,7 +314,20 @@ function PlayerSystem(input, scene, threeJsSystem) {
             }
         } else {
             this.player.playerComponent.isPushing = false;
-            tryAndMove(this.player, nextMove);
+            var actualMove = tryAndMove(this.player, nextMove);
+
+            if(!this.player.playerComponent.isPushing && actualMove.lengthSq() > 0) {
+                this.player.threeJsComponent.positionOffset.y += bobDir*tick;
+                if(this.player.threeJsComponent.positionOffset.y > 0.65) {
+                    this.player.threeJsComponent.positionOffset.y = 0.65;
+                    bobDir = -2;
+                } else if(this.player.threeJsComponent.positionOffset.y < 0.35) {
+                    this.player.threeJsComponent.positionOffset.y = 0.35;
+                    bobDir = 2;
+                }
+            } else {
+                this.player.threeJsComponent.positionOffset.y = 0.5;
+            }
         }
     }
 }
