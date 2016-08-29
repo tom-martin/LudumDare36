@@ -65,6 +65,14 @@ function PlayerSystem(input, scene, threeJsSystem) {
         if(horizontalCount < 2 && verticalCount < 2) {
             self.blockEntity.spriteComponent.sprite.setAnim("rockCracked");
             self.blockEntity.spriteComponent.sprite.update(0);
+
+            try {
+                if(!self.player.playerComponent.failing) {
+                    failSound.play();
+                }
+            } catch(err) {
+                console.log("Couldn't play "+err);
+            }
             self.player.playerComponent.failing = true;
         }
 
@@ -201,6 +209,11 @@ function PlayerSystem(input, scene, threeJsSystem) {
         if(blockFinishDistSq < 0.5) {
             this.player.playerComponent.completionTimer += tick;
             if(this.player.playerComponent.completionTimer > 0.5 || blockFinishDistSq < 0.001) {
+                try {
+                    winSound.play();
+                } catch(err) {
+                    console.log("Couldn't play "+err);
+                }
                 this.player.playerComponent.levelComplete = true;
                 return;
             }

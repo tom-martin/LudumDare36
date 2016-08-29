@@ -36,6 +36,9 @@ function onClick( event ) {
 window.addEventListener( 'click', onClick, false );
 window.addEventListener("touchstart", handleTouchStart, false);
 
+var winSound = new Audio("sounds/done.wav");
+var failSound = new Audio("sounds/broken.wav");
+
 var respondToResize = function() {
     threeCamera.aspect = window.innerWidth / window.innerHeight;
     threeCamera.updateProjectionMatrix();
@@ -54,7 +57,7 @@ var threeJsSystem = null;
 var playerSystem = null;
 var threeCamera = null;
 var player = null;
-var levelIndex = 7;
+var levelIndex = 0;
 
 function initGame(keepText) {
     var level = levels[levelIndex];
@@ -68,7 +71,7 @@ function initGame(keepText) {
     container.innerHTML = '';
 
     container.appendChild(renderer.domElement);
-    container.appendChild( stats.domElement );
+    // container.appendChild( stats.domElement );
 
     var light = new THREE.AmbientLight( 0xffffff );
     scene.add( light );
@@ -155,7 +158,7 @@ function render(t) {
 
     if(player.playerComponent.failed) {
         $('#modalTitle').text('YOU BROKE YOUR ROCK!');
-        $('#modalMessage').text('TRY AND KEEP IT ON TWO LOGS AT ALL TIMES!');    
+        $('#modalMessage').text('TRY AND KEEP IT ON TWO PARALLEL LOGS AT ALL TIMES!');    
         $('#modalButton').text('TRY AGAIN ...'); 
         initGame(true);
         

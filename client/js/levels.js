@@ -50,7 +50,7 @@ var levels = [
 		],
 		levelTitle: "LEVEL FOUR",
 		levelMessage: "GOOD LUCK!",
-		buttonText: "PUSH!"
+		buttonText: "LET'S PUSH THINGS FORWARD!"
 	}
 	,
 	{
@@ -101,7 +101,7 @@ var levels = [
 		],
 		levelTitle: "LEVEL SEVEN",
 		levelMessage: "GOOD LUCK!",
-		buttonText: "I'VE GOT THIS!"
+		buttonText: "AYE AYE!"
 	}
 	,
 	{
@@ -116,19 +116,9 @@ var levels = [
 		  {type: "tree", x: 6, y: 1},
 		  {type: "tree", x: 2, y: 5},
 		  {type: "tree", x: 6, y: 7}
-		  // {type: "roller", x: -3, y: -5, horizontal: true},
-		  // {type: "roller", x: -3, y: -3, horizontal: true},
-		  // {type: "tree", x: -4, y: 2, horizontal: true},
-		  // {type: "tree", x: -2, y: 2, horizontal: true},
-		  // {type: "tree", x: 0, y: 6, horizontal: true},
-		  // {type: "tree", x: -5, y: -1, horizontal: true},
-		  // {type: "tree", x: 1, y: 1, horizontal: true},
-		  // {type: "tree", x: 5, y: 3, horizontal: true},
-		  // {type: "tree", x: 5, y: 5, horizontal: true},
-		  // {type: "finish", x: 3, y: -4, horizontal: true},
 		],
 		levelTitle: "LEVEL EIGHT",
 		levelMessage: "GOOD LUCK!",
-		buttonText: "LET'S GO!"
+		buttonText: "LAST ONE!"
 	}
 ];
