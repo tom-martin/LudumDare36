@@ -1,19 +1,41 @@
 <html> 
   <head>
   	<title>LD 36</title> 
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <style>
+
+        @font-face 
+        {
+            font-family:"CustomFont";
+            src: url("fonts/font.otf");
+            font-weight: normal;
+            font-style: normal;
+            text-transform: uppercase;
+        } 
+
         body {
             margin: 0px;
             overflow: hidden;
+            font-family: CustomFont;
         }
 
         #restartButton {
           position: absolute;
           left: 0px;
           top: 0px;
+          font-family: CustomFont;
+        }
+
+        .btn.btn-primary {
+          background-color: #468682;
+          border-color: #367672;
+        }
+
+        .btn.btn-primary:hover {
+          background-color: #266662;
+          border-color: #165652;
         }
     </style>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   </head> 
   <body style="overflow: hidden;">
@@ -23,18 +45,18 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 id="modalTitle" class="modal-title">Get the block to the end</h4>
+            <h4 id="modalTitle" class="modal-title">GET THE BLOCK TO THE END</h4>
           </div>
           <div class="modal-body">
-            <p id="modalMessage">Use wasd or the arrow keys to control the player</p>
+            <p id="modalMessage">USE WASD OR THE ARROW KEYS TO CONTROL THE PLAYER</p>
           </div>
           <div class="modal-footer">
-            <button id="modalButton" type="button" data-dismiss="modal" class="btn btn-primary">Got it!</button>
+            <button id="modalButton" type="button" data-dismiss="modal" class="btn btn-primary">GOT IT!</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-    <button id="restartButton" type="button" data-dismiss="modal" class="btn btn-primary">Start Over</button>
+    <button id="restartButton" type="button" data-dismiss="modal" class="btn btn-primary">START OVER</button>
   	<script src="js/lib/three.min.js"></script> 
     <script src="js/lib/stats.min.js"></script>
     <script src="js/lib/priority-queue-min.js"></script>

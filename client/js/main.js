@@ -43,6 +43,7 @@ var respondToResize = function() {
     if(renderer != null) {
         renderer.setSize( window.innerWidth, window.innerHeight );
     }
+    $("#restartButton").css({top: window.innerHeight-50, left: (window.innerWidth/2)-50, position:'absolute'});
 }
 
 
@@ -82,9 +83,7 @@ function initGame() {
     threeCamera.lookAt(new THREE.Vector3(0, 0, 0));
 
     for(var x = -10; x < 14; x+=4) {
-        // for(var y = -10; y < 10; y+=2) {
         createLongGroundTile(scene, x, 0, threeJsSystem);
-        // }
     }
 
     for(var i in level.entities) {
@@ -144,9 +143,9 @@ function render(t) {
             initGame();
         } else {
             levelIndex = 0;
-            $('#modalTitle').text('Congratulations');
-            $('#modalMessage').text('You finished all the levels!');    
-            $('#modalButton').text('Play Again!'); 
+            $('#modalTitle').text('CONGRATULATIONS!');
+            $('#modalMessage').text('YOU FINISHED ALL THE LEVELS!');    
+            $('#modalButton').text('PLAY AGAIN!'); 
             initGame();
         }
     }

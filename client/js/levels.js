@@ -20,9 +20,9 @@ var levels = [
 		  {type: "block", x: 0, y: -4 },
 		  {type: "finish", x: 0, y: 4, horizontal: true},
 		],
-		levelTitle: "Level 2",
-		levelMessage: "Good luck!",
-		buttonText: "Let's go!"
+		levelTitle: "LEVEL TWO",
+		levelMessage: "GOOD LUCK!",
+		buttonText: "LET'S GO!"
 	}
 	,
 	{
@@ -34,9 +34,9 @@ var levels = [
 		  {type: "block", x: 0, y: -4 },
 		  {type: "finish", x: 0, y: 4, horizontal: true},
 		],
-		levelTitle: "Level 3",
-		levelMessage: "Use the spacebar to cut down trees.",
-		buttonText: "Chop chop!"
+		levelTitle: "LEVEL THREE",
+		levelMessage: "USE THE SPACEBAR TO CUT DOWN TREES.",
+		buttonText: "CHOP CHOP!"
 	}
 	,
 	{
@@ -48,9 +48,9 @@ var levels = [
 		  {type: "block", x: 0, y: -4 },
 		  {type: "finish", x: 0, y: 4, horizontal: true},
 		],
-		levelTitle: "Level 4",
-		levelMessage: "Good Luck!",
-		buttonText: "Push!"
+		levelTitle: "LEVEL FOUR",
+		levelMessage: "GOOD LUCK!",
+		buttonText: "PUSH!"
 	}
 	,
 	{
@@ -64,9 +64,9 @@ var levels = [
 		  {type: "block", x: 0, y: -6 },
 		  {type: "finish", x: -4, y: 2, horizontal: true},
 		],
-		levelTitle: "Level 5",
-		levelMessage: "Good luck!",
-		buttonText: "Here We Go!"
+		levelTitle: "LEVEL FIVE",
+		levelMessage: "GOOD LUCK!",
+		buttonText: "HERE WE GO!"
 	}
 	,
 	{
@@ -80,9 +80,9 @@ var levels = [
 		  {type: "tree", x: 2, y: -1, horizontal: true},
 		  {type: "finish", x: 4, y: 4, horizontal: true},
 		],
-		levelTitle: "Level 6",
-		levelMessage: "Good luck!",
-		buttonText: "I've got this!"
+		levelTitle: "LEVEL SIX",
+		levelMessage: "GOOD LUCK!",
+		buttonText: "I'VE GOT THIS!"
 	},
 	{
 		entities : [
@@ -99,8 +99,8 @@ var levels = [
 		  {type: "tree", x: 8, y: 5, horizontal: true},
 		  {type: "finish", x: 6, y: -4, horizontal: true},
 		],
-		levelTitle: "Level 7",
-		levelMessage: "Good luck!",
-		buttonText: "I've got this!"
+		levelTitle: "LEVEL SEVEN",
+		levelMessage: "GOOD LUCK!",
+		buttonText: "I'VE GOT THIS!"
 	}
 ];
