@@ -172,6 +172,10 @@ $(function() {
     window.addEventListener("resize", respondToResize);
     requestAnimationFrame(render);
 
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#modalButton').focus()
+    })
+
     $('#restartButton').click(function() {
         initGame();
     });
