@@ -54,7 +54,7 @@ var threeJsSystem = null;
 var playerSystem = null;
 var threeCamera = null;
 var player = null;
-var levelIndex = 5;
+var levelIndex = 7;
 
 function initGame(keepText) {
     var level = levels[levelIndex];
