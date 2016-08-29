@@ -82,7 +82,7 @@ function initGame(keepText) {
     playerSystem = new PlayerSystem(input, scene, threeJsSystem);
 
     threeCamera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.5, 1000 );
-    threeCamera.position.set(0, 0, 35);
+    threeCamera.position.set(0, 0, 25);
     threeCamera.lookAt(new THREE.Vector3(0, 0, 0));
 
     for(var x = -10; x < 14; x+=4) {
